@@ -5,6 +5,8 @@ import { StatusBar } from 'react-native';
 
 
 import Logo from '../../assets/logo.svg';
+import { Car } from '../../components/Car';
+
 
 import {
   Container,
@@ -32,6 +34,9 @@ export function Home() {
           </TotalCars>
         </HeaderContent>
       </Header>
+
+      <Car/>
+
     </Container>
   );
 }
