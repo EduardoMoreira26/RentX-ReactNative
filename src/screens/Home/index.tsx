@@ -16,6 +16,29 @@ import {
 } from './styles';
 
 export function Home() {
+  const carDataOne = {
+    brand: 'AUDI',
+    name: 'Coupé',
+    rent: {
+      period: 'AO DIA',
+      price: 120,
+    },
+    thumbnail: 'https://image.pngaaa.com/570/1341570-middle.png',
+    
+  }
+
+  const carDataTwo = {
+    brand: 'HONDA',
+    name: 'Civic',
+    rent: {
+      period: 'AO DIA',
+      price: 155,
+    },
+    thumbnail: 'https://image.pngaaa.com/570/1341570-middle.png',
+    
+  }
+
+
   return (
     <Container>
       <StatusBar
@@ -35,7 +58,8 @@ export function Home() {
         </HeaderContent>
       </Header>
 
-      <Car/>
+      <Car data={carDataOne}/>
+      <Car data={carDataTwo}/>
 
     </Container>
   );
