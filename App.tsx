@@ -2,7 +2,6 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/styles/theme';
 
-
 import {
   useFonts,
   Inter_400Regular,
@@ -17,6 +16,7 @@ import {
 
 import { CarDetails } from './src/screens/CarDetails';
 import AppLoading from 'expo-app-loading';
+import { Scheduling } from './src/screens/Scheduling';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>    
-        <CarDetails />      
+        <Scheduling />      
     </ThemeProvider>
   )
 }
