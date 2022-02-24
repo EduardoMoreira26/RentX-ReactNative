@@ -6,7 +6,16 @@ import { ImageSlider } from '../../components/ImageSlider';
 import {
   Container,
   Header,
-  CarImages
+  CarImages,
+  Description,
+  Content,
+  Details,
+  Brand,
+  Price,
+  Rent,
+  Period, 
+  Name,
+  About
 } from './styles';
 
 export function CarDetails() {
@@ -26,7 +35,23 @@ export function CarDetails() {
         />
       </CarImages>
 
+      <Content>
+        <Details>
+          <Description>
+            <Brand>Lamborghini</Brand>
+            <Name>Huracan</Name>
+          </Description>
 
+          <Rent>
+            <Period>Ao dia</Period>
+            <Price>R$ 580,00</Price>
+          </Rent>
+        </Details>
+
+        <About>
+          Esse carro é muito potente poquer o seu motor é rápido e veloz, seus pneus tem aderencia e mais um monte de coisa.
+        </About>
+      </Content>
 
 
     </Container>
