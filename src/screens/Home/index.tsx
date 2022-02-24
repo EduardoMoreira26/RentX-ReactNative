@@ -9,6 +9,7 @@ import { Car } from '../../components/Car';
 
 
 import {
+  CarList,
   Container,
   Header,
   HeaderContent,
@@ -16,7 +17,7 @@ import {
 } from './styles';
 
 export function Home() {
-  const carDataOne = {
+  const carData = {
     brand: 'AUDI',
     name: 'Coupé',
     rent: {
@@ -24,18 +25,7 @@ export function Home() {
       price: 120,
     },
     thumbnail: 'https://image.pngaaa.com/570/1341570-middle.png',
-    
-  }
 
-  const carDataTwo = {
-    brand: 'HONDA',
-    name: 'Civic',
-    rent: {
-      period: 'AO DIA',
-      price: 155,
-    },
-    thumbnail: 'https://image.pngaaa.com/570/1341570-middle.png',
-    
   }
 
 
@@ -58,8 +48,13 @@ export function Home() {
         </HeaderContent>
       </Header>
 
-      <Car data={carDataOne}/>
-      <Car data={carDataTwo}/>
+      <CarList
+        data={[1, 2, 3, 4, 5, 6, 7, 8]}
+        keyExtractor={item => String(item)}
+        renderItem={({ item }) => <Car data={carData} />}
+      />
+
+
 
     </Container>
   );
