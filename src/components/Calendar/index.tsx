@@ -5,16 +5,44 @@ import { useTheme } from 'styled-components';
 // import { generateInterval } from './generateInterval';
 // import { ptBR } from './localeConfig';
 
-import { 
+import {
   Calendar as CustomCalendar,
   LocaleConfig,
   // DateCallbackHandler,  
 } from 'react-native-calendars';
 
-// LocaleConfig.locales['pt-br'] = ptBR;
-// LocaleConfig.defaultLocale = 'pt-br';
+LocaleConfig.locales['pt-br'] = {
+  monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Outubro', 'Novembro', 'Dezembro'],
+  monthNamesShort: [
+    "Jan.",
+    "Fev.",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul.",
+    "Ago",
+    "Set.",
+    "Out.",
+    "Nov.",
+    "Dez."
+  ],
+  dayNames: [
+    "Domingo",
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sábado"
+  ],
+  dayNamesShort: ["Dom.", "Seg.", "Ter.", "Qua.", "Qui.", "Sex.", "Sáb."],
+  today: "Hoje"
+}
 
-interface MarkedDateProps{
+LocaleConfig.defaultLocale = 'pt-br';
+
+interface MarkedDateProps {
   [date: string]: {
     color: string;
     textColor: string;
@@ -27,7 +55,7 @@ interface DayProps {
   dateString: string;
   day: number;
   month: number;
-  year: number;  
+  year: number;
   timestamp: number;
 }
 
@@ -36,17 +64,17 @@ interface CalendarProps {
   // onDayPress: DateCallbackHandler;
 }
 
-function Calendar({ markedDates }: CalendarProps){
+function Calendar({ markedDates }: CalendarProps) {
   const theme = useTheme();
 
   return (
-    <CustomCalendar 
-      renderArrow={( direction ) => 
-        <Feather          
+    <CustomCalendar
+      renderArrow={(direction) =>
+        <Feather
           size={24}
           color={theme.colors.text}
           name={direction == 'left' ? 'chevron-left' : 'chevron-right'}
-        />        
+        />
       }
 
       headerStyle={{
@@ -61,7 +89,7 @@ function Calendar({ markedDates }: CalendarProps){
         textDayFontFamily: theme.fonts.primary_400,
         textDayHeaderFontFamily: theme.fonts.primary_500,
         textDayHeaderFontSize: 10,
-        textMonthFontFamily: theme.fonts.secondary_600,
+        textMonthFontFamily: theme.fonts.primary_500,
         textMonthFontSize: 20,
         monthTextColor: theme.colors.title,
         arrowStyle: {
@@ -70,10 +98,10 @@ function Calendar({ markedDates }: CalendarProps){
       }}
 
       firstDay={1}
-      // minDate={new Date()}
+      minDate={new Date().toString()}
       markingType="period"
       markedDates={markedDates}
-      // onDayPress={onDayPress}
+    // onDayPress={onDayPress}
     />
   );
 }
