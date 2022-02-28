@@ -4,6 +4,7 @@ import { StatusBar } from 'react-native';
 
 import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car';
+import { Load } from '../../components/Load';
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 
@@ -70,16 +71,19 @@ export function Home() {
         </HeaderContent>
       </Header>
 
-      <CarList
-        data={cars}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) =>
-          <Car
-            data={item}
-            onPress={handleCardDetails}
-          />
-        }
-      />
+      {loading ? <Load /> :
+        <CarList
+          data={cars}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) =>
+            <Car
+              data={item}
+              onPress={handleCardDetails}
+            />
+          }
+        />
+      }
+
 
 
 
