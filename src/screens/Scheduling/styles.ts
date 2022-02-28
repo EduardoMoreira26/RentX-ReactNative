@@ -47,7 +47,7 @@ export const DateInfo = styled.View`
 
 export const DateTitle = styled.Text`
   color: ${({ theme }) => theme.colors.text};
-  font-family: ${({ theme }) => theme.fonts.secondary_500};
+  font-family: ${({ theme }) => theme.fonts.primary_500};
   font-size: 10px;
 `;
 
