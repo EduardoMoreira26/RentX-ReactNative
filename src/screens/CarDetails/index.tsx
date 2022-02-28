@@ -27,57 +27,68 @@ import {
   Footer
 } from './styles';
 import { Button } from '../../components/Button';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CarDTO } from '../../dtos/CarDTO';
+
+interface Params {
+  car: CarDTO;
+}
 
 export function CarDetails() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { car } = route.params as Params;
 
 
   function handleConfirmRental() {
     navigation.navigate('Scheduling');
   }
 
-
+  function handleBack() {
+    navigation.goBack();
+  }
 
   return (
     <Container>
 
       <Header>
-        <BackButton onPress={() => { }} />
+        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>
         <ImageSlider
-          imageUrl={['https://www.honda.com.br/automoveis/sites/hab/files/2017-03/CIVIC_EX.png']}
+          imageUrl={car.photos}
         />
       </CarImages>
 
       <Content>
         <Details>
           <Description>
-            <Brand>Lamborghini</Brand>
-            <Name>Huracan</Name>
+            <Brand>{car.brand}</Brand>
+            <Name>{car.name}</Name>
           </Description>
 
           <Rent>
-            <Period>Ao dia</Period>
-            <Price>R$ 580,00</Price>
+            <Period>{car.rent.period}</Period>
+            <Price>R$ {car.rent.price}</Price>
           </Rent>
         </Details>
 
         <Accessories>
+          {
+            car.accessories.map(accessory => (
+              <Accessory
+                key={accessory.type}
+                name={accessory.name}
+                icon={speedSvg}
+              />
 
-          <Accessory name="380km/h" icon={speedSvg} />
-          <Accessory name="3.2s" icon={accelerationSvg} />
-          <Accessory name="800Hp" icon={forceSvg} />
-          <Accessory name="Gasolina" icon={gasolineSvg} />
-          <Accessory name="Auto" icon={exchangeSvg} />
-          <Accessory name="2 pessoas" icon={peopleSvg} />
+            ))
+          }
+
         </Accessories>
 
-        <About>
-          Esse carro é muito potente poquer o seu motor é rápido e veloz, seus pneus tem aderencia e mais um monte de coisa.
-        </About>
+        <About>{car.about}</About>
 
 
       </Content>
