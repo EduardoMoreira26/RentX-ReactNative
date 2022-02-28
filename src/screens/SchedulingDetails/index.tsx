@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 
-
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
@@ -13,6 +12,9 @@ import { useTheme } from 'styled-components';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getPlatformDate } from '../../utils/getPlatformDate';
+
+import { api } from '../../services/api';
+import { Alert } from 'react-native';
 
 import {
   Container,
@@ -42,6 +44,7 @@ import {
 
 
 
+
 interface Params {
   car: CarDTO;
   dates: string[];
@@ -62,8 +65,21 @@ export function SchedulingDetails() {
 
   const rentTotal = Number(dates.length * car.rent.price);
 
-  function handleConfirmRental() {
-    navigation.navigate('SchedulingComplete');
+  async function handleConfirmRental() {
+    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
+
+    const unavailable_dates = [
+      ...schedulesByCar.data.unavailable_dates,
+      ...dates,
+
+    ];
+
+    api.put(`/schedules_bycars/${car.id}`, {
+      id: car.id,
+      unavailable_dates
+    })
+    .then(() => navigation.navigate('SchedulingComplete'))
+    .catch(() => Alert.alert('Não foi possível completar o agendamento.'))
   }
 
 
