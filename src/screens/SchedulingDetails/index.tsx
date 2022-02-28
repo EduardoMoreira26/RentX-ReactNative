@@ -41,8 +41,15 @@ import {
 
 import { Button } from '../../components/Button';
 import { useTheme } from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
 
 export function SchedulingDetails() {
+
+  const navigation = useNavigation();
+
+  function handleConfirmRental() {
+    navigation.navigate('SchedulingComplete');
+  }
 
   const theme = useTheme();
 
@@ -120,7 +127,11 @@ export function SchedulingDetails() {
 
       <Footer>
 
-        <Button title="Confirmar" />
+        <Button
+          title="Alugar agora"
+          color={theme.colors.success}
+          onPress={handleConfirmRental}
+        />
       </Footer>
 
     </Container>
