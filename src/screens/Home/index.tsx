@@ -74,9 +74,6 @@ export function Home() {
         />
       }
 
-
-
-
     </Container>
   );
 }
