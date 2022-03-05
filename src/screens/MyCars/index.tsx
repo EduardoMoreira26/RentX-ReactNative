@@ -6,6 +6,7 @@ import { BackButton } from '../../components/BackButton';
 import { Car } from '../../components/Car';
 import { CarDTO } from '../../dtos/CarDTO';
 import { api } from '../../services/api';
+import { AntDesign } from '@expo/vector-icons'
 
 import {
   Container,
@@ -27,8 +28,8 @@ interface CarProps {
   id: string;
   user_id: string;
   car: CarDTO;
-  // startDate: string;
-  // endDate: string;
+  startDate: string;
+  endDate: string;
 }
 
 // interface DataProps {
@@ -74,7 +75,7 @@ export function MyCars() {
           backgroundColor="transparent"
         />
         <BackButton
-          onPress={handleBack} 
+          onPress={handleBack}
           color={theme.colors.shape}
         />
 
@@ -88,36 +89,36 @@ export function MyCars() {
           Conforto, segurança e praticidade.
         </SubTitle>
       </Header>
-      { 
+      {
         <Content>
           <Appointments>
             <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
             <AppointmentsQuantity>{cars.length}</AppointmentsQuantity>
           </Appointments>
 
-          <FlatList 
+          <FlatList
             data={cars}
             keyExtractor={item => String(item.id)}
             showsVerticalScrollIndicator={false}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <CarWrapper>
                 <Car data={item.car} />
                 <CarFooter>
                   <CarFooterTitle>Período</CarFooterTitle>
                   <CarFooterPeriod>
-                    {/* <CarFooterDate>{item.start_date}</CarFooterDate> */}
-                    {/* <AntDesign 
+                    <CarFooterDate>{item.startDate}</CarFooterDate>
+                    <AntDesign
                       name="arrowright"
                       size={20}
                       color={theme.colors.title}
                       style={{ marginHorizontal: 10 }}
-                    /> */}
-                    {/* <CarFooterDate>{item.end_date}</CarFooterDate> */}
+                    />
+                    <CarFooterDate>{item.endDate}</CarFooterDate>
                   </CarFooterPeriod>
                 </CarFooter>
               </CarWrapper>
             )}
-          /> 
+          />
         </Content>
       }
     </Container>
