@@ -1,5 +1,5 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { FlatList, ViewToken } from 'react-native';
 
 import {
   Container,
@@ -13,7 +13,20 @@ interface Props {
   imageUrl: string[];
 }
 
+interface ChangeImageProps {
+  viewableItems: ViewToken[];
+  changed: ViewToken[];
+}
+
 export function ImageSlider({ imageUrl }: Props) {
+  const [imagesIndex, setImageIndex] = useState(0);
+
+  const indexChanged = useRef((info: ChangeImageProps) => {
+    console.log(info)
+    const index = info.viewableItems[0].index!;
+    setImageIndex(index);
+  })
+
   return (
     <Container>
       <ImageIndexes>
@@ -21,7 +34,7 @@ export function ImageSlider({ imageUrl }: Props) {
           imageUrl.map((_, index) => (
             <ImageIndex 
               key={String(index)}
-              active={true} 
+              active={index === imagesIndex} 
             />        
           ))
         }
@@ -40,6 +53,7 @@ export function ImageSlider({ imageUrl }: Props) {
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={indexChanged.current}
       />
     </Container>
   );
