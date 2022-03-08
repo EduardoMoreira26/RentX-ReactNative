@@ -7,33 +7,38 @@ import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { SchedulingComplete } from '../screens/SchedulingComplete';
 import { MyCars } from '../screens/MyCars';
+import { Splash } from '../screens/Splash';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export function AppStackRoutes(){
-  return(
-    <Navigator headerMode="none" initialRouteName="Home">      
-      <Screen 
+export function AppStackRoutes() {
+  return (
+    <Navigator headerMode="none" initialRouteName="Splash">
+      <Screen
+        name="Splash"
+        component={Splash}
+      />
+      <Screen
         name="Home"
         component={Home}
-      />    
-      <Screen 
+      />
+      <Screen
         name="CarDetails"
         component={CarDetails}
       />
-      <Screen 
+      <Screen
         name="Scheduling"
         component={Scheduling}
       />
-      <Screen 
+      <Screen
         name="SchedulingDetails"
         component={SchedulingDetails}
       />
-      <Screen 
+      <Screen
         name="SchedulingComplete"
         component={SchedulingComplete}
       />
-      <Screen 
+      <Screen
         name="MyCars"
         component={MyCars}
       />
