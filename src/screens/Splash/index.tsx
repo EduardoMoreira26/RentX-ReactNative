@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, StyleSheet, Dimensions } from 'react-native';
+
+import BrandSvg from '../../assets/brand.svg';
+import LogoSvg from '../../assets/logo.svg';
 
 import Animated, { 
   useSharedValue, 
@@ -8,45 +10,37 @@ import Animated, {
   Easing 
 } from 'react-native-reanimated';
 
-const WIDTH = Dimensions.get('window').width;
 
 import {
   Container
 } from './styles';
 
 export function Splash() {
-  const animation = useSharedValue(0);
+  const logoAnimation = useSharedValue(0);
 
-  function handleAnimationPosition() {
-    animation.value = Math.random() * (WIDTH - 100);
-  }
-
-  const animatedStyles = useAnimatedStyle(() => {
+  const brandStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          translateX: withTiming(animation.value, {
-            duration: 500,
-            easing: Easing.bezier(.95,-0.01,0,1.51)
-          })
-        }
-      ]
+      opacity: 0
     }
-  });
+  })
+
+  const logoStyle = useAnimatedStyle(() => {
+    return {
+      opacity: 0
+    }
+  })
 
   return (
     <Container>
-      <Animated.View style={[styles.box, animatedStyles]} />
+      <Animated.View style={brandStyle}>
+        <BrandSvg width={80} height={50}/>
+      </Animated.View>
 
-      <Button title="Splash" onPress={handleAnimationPosition} />
+      <Animated.View style={logoStyle}>
+        <LogoSvg width={180} height={20}/>
+      </Animated.View>
+      
     </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  box: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'red',
-  }
-})
