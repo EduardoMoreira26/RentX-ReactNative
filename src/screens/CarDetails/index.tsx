@@ -2,6 +2,8 @@ import React from 'react';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
+import {useTheme} from 'styled-components';
+
 
 import { getAccessoryIcon } from '../../utils/getAccesoryIcon';
 
@@ -37,10 +39,11 @@ export function CarDetails() {
   const route = useRoute();
   const { car } = route.params as Params;
 
+  const theme = useTheme();
+
   const scrollY = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y;
-    console.log(event.contentOffset.y)
   })
 
   const headerStyleAnimation = useAnimatedStyle(() => {
@@ -83,18 +86,22 @@ export function CarDetails() {
       />
 
       <Animated.View
-        style={[headerStyleAnimation, styles.header]}
+        style={[
+          headerStyleAnimation,
+          styles.header,
+          {backgroundColor: theme.colors.background_secondary}
+        ]}
       >
         <Header >
-          <BackButton onPress={handleBack} style={styles.back} />
+          <BackButton onPress={handleBack} />
         </Header>
 
-        <Animated.View
-          style={slideCarsStyleAnimation}
-        >
-          <ImageSlider
-            imageUrl={car.photos}
-          />
+        <Animated.View style={slideCarsStyleAnimation}>
+          <CarImages>
+            <ImageSlider
+              imageUrl={car.photos}
+            />
+          </CarImages>
         </Animated.View>
       </Animated.View>
 
@@ -155,8 +162,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     overflow: 'hidden',
     zIndex: 1
-  },
-  back: {
-    marginTop: 24,
   }
 })
