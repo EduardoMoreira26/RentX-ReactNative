@@ -7,7 +7,7 @@ import { getAccessoryIcon } from '../../utils/getAccesoryIcon';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { StatusBar } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import Animated, { useSharedValue, useAnimatedScrollHandler, useAnimatedStyle, interpolate, Extrapolate } from 'react-native-reanimated';
 
 import {
@@ -53,6 +53,18 @@ export function CarDetails() {
       )
     }
   })
+
+  const slideCarsStyleAnimation = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        scrollY.value,
+        [0, 150],
+        [1, 0],
+        Extrapolate.CLAMP
+      )
+    }
+  })
+
   function handleConfirmRental() {
     navigation.navigate('Scheduling' as never, { car } as never);
   }
@@ -71,17 +83,19 @@ export function CarDetails() {
       />
 
       <Animated.View
-        style={[headerStyleAnimation]}
+        style={[headerStyleAnimation, styles.header]}
       >
-        <Header>
-          <BackButton onPress={handleBack} />
+        <Header >
+          <BackButton onPress={handleBack} style={styles.back} />
         </Header>
 
-        <CarImages>
+        <Animated.View
+          style={slideCarsStyleAnimation}
+        >
           <ImageSlider
             imageUrl={car.photos}
           />
-        </CarImages>
+        </Animated.View>
       </Animated.View>
 
 
@@ -89,10 +103,11 @@ export function CarDetails() {
       <Animated.ScrollView
         contentContainerStyle={{
           paddingHorizontal: 24,
-          paddingTop: getStatusBarHeight(),
+          paddingTop: getStatusBarHeight() + 160,
         }}
         showsVerticalScrollIndicator={false}
         onScroll={scrollHandler}
+        scrollEventThrottle={16}
       >
         <Details>
           <Description>
@@ -134,3 +149,14 @@ export function CarDetails() {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    position: 'absolute',
+    overflow: 'hidden',
+    zIndex: 1
+  },
+  back: {
+    marginTop: 24,
+  }
+})
