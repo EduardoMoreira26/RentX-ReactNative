@@ -1,13 +1,13 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components';
-import {  RectButtonProps } from 'react-native-gesture-handler';
+import { RectButtonProps } from 'react-native-gesture-handler';
 import {
   Container,
   Title
 } from './styles';
 
-interface Props extends RectButtonProps{
+interface Props extends RectButtonProps {
   title: string;
   color?: string;
   loading?: boolean;
@@ -23,20 +23,20 @@ export function Button({
   enabled = true,
   loading = false,
   light = false,
-}: Props){
+}: Props) {
   const theme = useTheme();
 
   return (
-    <Container 
-      color={color ? color : theme.colors.main} 
+    <Container
+      color={color ? color : theme.colors.main}
       onPress={onPress}
       enabled={enabled}
       style={{ opacity: (enabled === false || loading === true) ? .5 : 1 }}
     >
       {
-        loading 
-        ? <ActivityIndicator color={theme.colors.shape} />
-        : <Title light={light}>{title}</Title>      
+        loading
+          ? <ActivityIndicator color={theme.colors.shape} />
+          : <Title light={light}>{title}</Title>
       }
     </Container>
   );
