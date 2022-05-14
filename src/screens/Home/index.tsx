@@ -11,7 +11,6 @@ const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car';
-import { Load } from '../../components/Load';
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 
@@ -23,6 +22,7 @@ import {
 	TotalCars,
 } from './styles';
 import { useTheme } from 'styled-components';
+import { LoadAnimation } from '../../components/LoadAnimation';
 
 export function Home() {
 	const navigation = useNavigation();
@@ -114,7 +114,7 @@ export function Home() {
 				</HeaderContent>
 			</Header>
 
-			{loading ? <Load /> :
+			{loading ? <LoadAnimation /> :
 				<CarList
 					data={cars}
 					keyExtractor={item => String(item.id)}
@@ -150,8 +150,6 @@ export function Home() {
 					</ButtonAnimated>
 				</Animated.View>
 			</PanGestureHandler>
-
-
 		</Container>
 	);
 }
