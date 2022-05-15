@@ -25,3 +25,14 @@ export const SubTitle = styled.Text`
     line-height: 25px;
     margin-top: 16px;
 `;
+
+export const Form = styled.View`
+  width: 100%;
+  margin: 64px 0;
+`;
+
+export const Footer = styled.View`
+    /* font-size: 40px;
+    font-family: ${({ theme }) => theme.fonts.primary_500};
+    color: ${({ theme }) => theme.colors.title}; */
+`;

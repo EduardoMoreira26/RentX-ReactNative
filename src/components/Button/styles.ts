@@ -9,9 +9,8 @@ interface ButtonTextProps {
   light: boolean;
 }
 
-export const Container = styled(RectButton)<ButtonProps>`
+export const Container = styled(RectButton) <ButtonProps>`
   width: 100%;
-
   padding: 19px;
   align-items: center;
   justify-content: center;
@@ -21,8 +20,8 @@ export const Container = styled(RectButton)<ButtonProps>`
 `;
 
 export const Title = styled.Text<ButtonTextProps>`
-  font-family: ${({theme}) => theme.fonts.primary_500};
+  font-family: ${({ theme }) => theme.fonts.primary_500};
   font-size: 15px;
-  color: ${({theme, light}) => 
-  light ? theme.colors.header : theme.colors.shape};
+  color: ${({ theme, light }) =>
+    light ? theme.colors.header : theme.colors.shape};
 `;
