@@ -1,9 +1,18 @@
-import styled from "styled-components/native";
+import styled, {css} from "styled-components/native";
 
-export const Container = styled.View`
+interface ContainerProps {
+    isFocused: boolean;
+}
+
+export const Container = styled.View<ContainerProps>`
     flex-direction: row;
 
     margin-bottom: 8px;
+
+    ${({isFocused, theme}) => isFocused && css`
+        border-bottom-width: 2px;};
+        border-color: ${theme.colors.main};
+    `}
 `;
 
 export const IconContainer = styled.View`
@@ -18,7 +27,7 @@ export const IconContainer = styled.View`
 
 export const InputText = styled.TextInput`
     flex: 1;
-
+    
     background-color: ${({ theme }) => theme.colors.background_secondary};
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.fonts.primary_400};
