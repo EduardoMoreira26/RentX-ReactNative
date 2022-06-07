@@ -9,7 +9,7 @@ import { Input } from '../../../components/Input';
 import { PasswordInput } from '../../../components/PasswordInput';
 import theme from '../../../styles/theme';
 
-import { Container, Header, SubTitle, Title, Footer, Form, Steps, FormTitle } from './styles';
+import { Container, Header, SubTitle, Title, Form, Steps, FormTitle } from './styles';
 
 export function FirstStep() {
     const [email, setEmail] = useState('');
@@ -41,77 +41,67 @@ export function FirstStep() {
     }
 
     return (
-        // <KeyboardAvoidingView behavior='position' enabled>
-        //     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container>
-            <StatusBar
-                barStyle="dark-content"
-                backgroundColor="transparent"
-                translucent
-            />
-            <Header>
-                <BackButton onPress={handleBack} />
-                <Steps>
+        <KeyboardAvoidingView behavior='position' enabled>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <Container>
+                    <StatusBar
+                        barStyle="dark-content"
+                        backgroundColor="transparent"
+                        translucent
+                    />
+                    <Header>
+                        <BackButton onPress={handleBack} />
+                        <Steps>
 
-                    <Bullet active />
-                    <Bullet />
-                </Steps>
-            </Header>
+                            <Bullet active />
+                            <Bullet />
+                        </Steps>
+                    </Header>
 
-            <Title>Crie sua{'\n'}conta</Title>
-            <SubTitle>
-                Faça seu cadastro de{'\n'}
-                forma rápida e facil
-            </SubTitle>
+                    <Title>Crie sua{'\n'}conta</Title>
+                    <SubTitle>
+                        Faça seu cadastro de{'\n'}
+                        forma rápida e facil
+                    </SubTitle>
 
-            <Form>
-                <FormTitle>1. Dados</FormTitle>
-                <Input
-                    iconName="mail"
-                    placeholder="E-mail"
-                    keyboardType="email-address"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    value={email}
-                    onChangeText={setEmail}
-                />
-                <Input
-                    iconName="mail"
-                    placeholder="E-mail"
-                    keyboardType="email-address"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    value={email}
-                    onChangeText={setEmail}
-                />
-                <PasswordInput
-                    iconName="lock"
-                    placeholder="Senha"
-                    value={password}
-                    onChangeText={setPassword}
-                />
-            </Form>
-
-            <Footer>
-                <Button
-                    title='Login'
-                    onPress={handleSignIn}
-                    enabled={true}
-                    loading={false}
-                />
-                <Button
-                    title='Criar conta gratuita'
-                    onPress={() => { }}
-                    enabled={true}
-                    loading={false}
-                    color={theme.colors.background_secondary}
-                    light
-                />
-            </Footer>
-        </Container>
-        //     </TouchableWithoutFeedback>
-
-        // </KeyboardAvoidingView>
-
+                    <Form>
+                        <FormTitle>1. Dados</FormTitle>
+                        <Input
+                            iconName="user"
+                            placeholder="Nome"
+                            keyboardType="email-address"
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
+                        <Input
+                            iconName="mail"
+                            placeholder="E-mail"
+                            keyboardType="email-address"
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
+                        <Input
+                            iconName="credit-card"
+                            placeholder="CNH"
+                            keyboardType="email-address"
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
+                    </Form>
+                    <Button
+                        title='Próximo'
+                        onPress={handleSignIn}
+                        enabled={true}
+                        loading={false}
+                    />
+                </Container>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }
